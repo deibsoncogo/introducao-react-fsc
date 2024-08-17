@@ -17,31 +17,47 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel">
-      function Button() {
-        return <button className="button">Click me</button>
-      }
-
-      function Input() {
-        return <input type="text" placeholder="Create your task" />
-      }
-
       function Header(props) {
         return <header className="header">{props.children}</header>
       }
 
       function App() {
+        const [inputValue, setInputValue] = React.useState("")
+        const [messages, setMessages] = React.useState(["Hello", "World"])
+
+        function handleButtonClick() {
+          setMessages([...messages, inputValue])
+        }
+
         return (
           <div>
             <Header>
-              <h1>Home - My tasks</h1>
+              <h1>Add a Task</h1>
             </Header>
 
-            <Button />
-            <Input />
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(event) => setInputValue(event.target.value)}
+              placeholder="Create your task"
+              className="input"
+            />
+
+            <button onClick={handleButtonClick} className="button">
+              Add task
+            </button>
 
             <Header>
-              <h1>About</h1>
+              <h1>My Tasks</h1>
             </Header>
+
+            <div>
+              <ul>
+                {messages.map((message) => (
+                  <li>{message}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         )
       }
