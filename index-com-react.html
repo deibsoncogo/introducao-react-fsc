@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="stylesheet" href="style.css" />
+
     <title>Document</title>
   </head>
 
@@ -16,18 +18,30 @@
 
     <script type="text/babel">
       function Button() {
-        return <button>Click me</button>
+        return <button className="button">Click me</button>
       }
 
       function Input() {
         return <input type="text" placeholder="Create your task" />
       }
 
+      function Header(props) {
+        return <header className="header">{props.children}</header>
+      }
+
       function App() {
         return (
           <div>
+            <Header>
+              <h1>Home - My tasks</h1>
+            </Header>
+
             <Button />
             <Input />
+
+            <Header>
+              <h1>About</h1>
+            </Header>
           </div>
         )
       }
