@@ -15,10 +15,27 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel">
+      function Button() {
+        return <button>Click me</button>
+      }
+
+      function Input() {
+        return <input type="text" placeholder="Create your task" />
+      }
+
+      function App() {
+        return (
+          <div>
+            <Button />
+            <Input />
+          </div>
+        )
+      }
+
       const app = document.getElementById("app")
       const root = ReactDOM.createRoot(app)
 
-      root.render(<h1>Develop. Preview. Ship.</h1>)
+      root.render(<App />)
     </script>
   </body>
 </html>
