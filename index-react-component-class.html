@@ -36,6 +36,18 @@
           this.handleAddTaskClick = this.handleAddTaskClick.bind(this)
         }
 
+        componentDidMount() {
+          console.log("Mount")
+        }
+
+        componentDidUpdate(prevProps, prevState) {
+          console.log("Update")
+        }
+
+        componentWillUnmount() {
+          console.log("Unmount")
+        }
+
         handleInputChange(event) {
           this.setState({ inputValue: event.target.value })
         }
