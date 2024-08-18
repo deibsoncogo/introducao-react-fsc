@@ -22,8 +22,25 @@
       }
 
       function App() {
+        const inputRef = React.useRef(false)
+
         const [inputValue, setInputValue] = React.useState("")
         const [messages, setMessages] = React.useState(["Hello", "World"])
+
+        React.useEffect(() => {
+          return () => console.log("Component will unmount")
+        }, [])
+
+        React.useEffect(() => {
+          if (inputRef.current) {
+            console.log("Component did update")
+          }
+        }, [])
+
+        React.useEffect(() => {
+          inputRef.current = true
+          console.log("Component did mount")
+        }, [])
 
         function handleButtonClick() {
           setMessages([...messages, inputValue])
@@ -54,7 +71,7 @@
             <div>
               <ul>
                 {messages.map((message) => (
-                  <li>{message}</li>
+                  <li key={message}>{message}</li>
                 ))}
               </ul>
             </div>
