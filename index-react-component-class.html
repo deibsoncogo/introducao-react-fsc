@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="app"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      class Header extends React.Component {
+        render() {
+          return <header className="header">{this.props.children}</header>
+        }
+      }
+
+      class App extends React.Component {
+        constructor() {
+          super()
+
+          this.state = {
+            inputValue: "teste",
+            tasks: ["Hello word", "FSC is the best course in the world"],
+          }
+
+          this.handleInputChange = this.handleInputChange.bind(this)
+          this.handleAddTaskClick = this.handleAddTaskClick.bind(this)
+        }
+
+        handleInputChange(event) {
+          this.setState({ inputValue: event.target.value })
+        }
+
+        handleAddTaskClick(event) {
+          this.setState({
+            inputValue: "",
+            tasks: [...this.state.tasks, this.state.inputValue],
+          })
+        }
+
+        render() {
+          return (
+            <div>
+              <Header>
+                <h1>Add a Task</h1>
+              </Header>
+
+              <input
+                type="text"
+                value={this.state.inputValue}
+                onChange={this.handleInputChange}
+                placeholder="Create your task"
+                className="input"
+              />
+
+              <button onClick={this.handleAddTaskClick} className="button">
+                Add task
+              </button>
+
+              <Header>
+                <h1>My Tasks</h1>
+              </Header>
+
+              <div>
+                <ul>
+                  {this.state.tasks.map((message) => (
+                    <li>{message}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )
+        }
+      }
+
+      const app = document.getElementById("app")
+      const root = ReactDOM.createRoot(app)
+
+      root.render(<App />)
+    </script>
+  </body>
+</html>
